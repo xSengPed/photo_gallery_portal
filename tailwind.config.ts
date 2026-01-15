@@ -7,14 +7,15 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate"],
-    darkTheme: "dark",
-    base: true,
-    styled: true,
-    utils: true,
-  },
+  plugins: [
+    require("daisyui")({
+      themes: ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate"],
+      darkTheme: "dark",
+      base: true,
+      styled: true,
+      utils: true,
+    }),
+  ],
 };
 
 export default config;
