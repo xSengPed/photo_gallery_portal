@@ -66,15 +66,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [mounted]);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      console.log('ThemeProvider: Switching from', prevTheme, 'to', newTheme);
+      localStorage.setItem('theme', newTheme);
 
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      console.log('ThemeProvider: classList now has dark?', document.documentElement.classList.contains('dark'));
+      return newTheme;
+    });
   };
 
   // Prevent flash of wrong theme

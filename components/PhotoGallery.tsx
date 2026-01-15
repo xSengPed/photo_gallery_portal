@@ -70,7 +70,7 @@ export default function PhotoGallery() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:from-slate-900 dark:to-slate-800 dark:bg-gradient-to-br">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       <ThemeToggle />
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         {/* Header */}
@@ -125,10 +125,6 @@ export default function PhotoGallery() {
                   </h2>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-700 dark:text-slate-400 font-light">
-                      {link.album?.assetCount ?? link.assets?.length ?? 0} ภาพ
-                    </span>
-
                     <span className="text-sm text-blue-600 dark:text-blue-400 font-light group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
                       ดูอัลบั้ม →
                     </span>

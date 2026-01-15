@@ -5,20 +5,26 @@ import { useTheme } from './ThemeProvider';
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
+  const handleToggle = () => {
+    console.log('Current theme:', theme);
+    toggleTheme();
+    console.log('Toggled! Check document.documentElement.classList:', document.documentElement.classList.contains('dark'));
+  };
+
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-slate-200 dark:border-slate-700"
       aria-label="Toggle theme"
     >
-      {theme === 'light' ? (
+      {theme === 'dark' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 text-slate-800"
+          className="w-6 h-6 text-blue-300"
         >
           <path
             strokeLinecap="round"
@@ -33,7 +39,7 @@ export default function ThemeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 text-yellow-400"
+          className="w-6 h-6 text-yellow-500"
         >
           <path
             strokeLinecap="round"

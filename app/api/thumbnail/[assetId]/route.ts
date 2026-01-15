@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import immichApi from '@/lib/axios';
 
 export async function GET(
   request: NextRequest,
@@ -7,27 +8,16 @@ export async function GET(
   try {
     const { assetId } = await params;
     console.log('Fetching thumbnail for asset:', assetId);
-    const response = await fetch(
-      `https://photos.test-d.pro/api/assets/${assetId}/thumbnail`,
-      {
-        headers: {
-          'x-api-key': '',
-        },
-        cache: 'force-cache',
-      }
-    );
 
-    if (!response.ok) {
-      console.error(`Failed to fetch thumbnail: ${response.status} ${response.statusText}`);
-      throw new Error(`Failed to fetch thumbnail: ${response.status}`);
-    }
+    const response = await immichApi.get(`/assets/${assetId}/thumbnail`, {
+      responseType: 'arraybuffer',
+    });
 
     console.log('Thumbnail fetched successfully for:', assetId);
 
-    const imageBuffer = await response.arrayBuffer();
-    const contentType = response.headers.get('content-type') || 'image/jpeg';
+    const contentType = response.headers['content-type'] || 'image/jpeg';
 
-    return new NextResponse(imageBuffer, {
+    return new NextResponse(response.data, {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=31536000, immutable',
